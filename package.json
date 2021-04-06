@@ -1,0 +1,19 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "yeet",
+  "main": "app.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "create-react-app": "^4.0.3",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gus": "node test.js",
+    "server": "node app.js"
+  },
+  "author": "me",
+  "license": "ISC"
+}
