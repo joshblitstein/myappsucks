@@ -6,7 +6,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "create-react-app": "^4.0.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "react-audio-player": "^0.16.1"
   },
   "devDependencies": {},
   "scripts": {

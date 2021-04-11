@@ -8,10 +8,11 @@ const port = 4000;
 
 
 app.get('/files', (req, res) => {
-    res.json(files)
+    res.sendFile(files[num], {root : '.'})
   })
   
 
+  
 app.listen(port, () =>{
     console.log(`hey port ${port}`)
 })
@@ -27,6 +28,8 @@ arrayOfFiles.forEach(f  =>{
     files.push(f)
 })
 
+let num  =  Math.floor(Math.random() * files.length);
+console.log(files[num])
 
-console.log(files)
+//console.log(files)
 module.exports = files;
