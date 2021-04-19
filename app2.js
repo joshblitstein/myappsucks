@@ -1,20 +1,30 @@
 const express = require("express")
+const connectDB = require('./config/db')
+
+
 const app = express();
 const cors = require('cors')
 const fs = require('fs')
 app.use(cors())
-const path = "13.mp3"
-const path2 = "8.mp3"
-const pathTry = "Ambeint Voltages\2.mp3"
-const port = 5000;
 
-console.log(__dirname)
+const port = process.env.PORT || 5000;
+
+
+//body parse
+app.use(express.json({ extended: false })) 
+
+connectDB();
 app.use('/test', express.static(__dirname + '/Ambeint Voltages'));
- //const read = fs.readFileSync(path)
-//console.log(read)
-app.get('/link', (req, res) => {
-res.sendFile(path, {root : '.'})
+
+app.use('/users', require('./routes/users'))
+app.use('/auth', require('./routes/auth'))
+app.use('/posts', require('./routes/posts'))
+app.use('/profile', require('./routes/profile'))
+
+/* app.get("/usersw", (req, res)=>{
+    res.json()
 })
+ */
 
 
 app.listen(port, () =>{

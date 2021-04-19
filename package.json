@@ -4,16 +4,27 @@
   "description": "yeet",
   "main": "app.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
     "cors": "^2.8.5",
     "create-react-app": "^4.0.3",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "react-audio-player": "^0.16.1"
+    "express-validator": "^6.10.0",
+    "gravatar": "^1.8.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.3",
+    "react-audio-player": "^0.16.1",
+    "request": "^2.88.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.0.1",
+    "nodemon": "^2.0.7"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app2",
     "gus": "node test.js",
-    "server": "node app.js"
+    "server": "nodemon app2"
   },
   "author": "me",
   "license": "ISC"
