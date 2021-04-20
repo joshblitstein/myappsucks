@@ -30,22 +30,19 @@ router.get('/me', auth, async (req, res)=>{
 });
 
 //create or update 
-router.post('/', [ auth, [
-    check('status', 'what yo stt').not().isEmpty(),
-   check('skills', 'show me skil').not().isEmpty()
-] ], async (req, res) => {
+router.post('/', [ auth ], async (req, res) => {
 
     const errors = validationResult(req);
     if(!errors.isEmpty() ){
         return res.status(400).json({ errors: errors.array() })
     }
 
-     const { company, website, location, status, skills, bio } = req.body; 
+     const { files, fileName, location, status, skills, bio } = req.body; 
  
     const profileField = {}; 
     profileField.user = req.user.id; 
-    if(company) profileField.company = company; 
-    if(website) profileField.website = website; 
+    if(files) profileField.files = files; 
+    if(fileName) profileField.fileName = fileName; 
     if(location) profileField.location = location; 
     if(status) profileField.status = status; 
     if(skills) profileField.skills = skills; 
