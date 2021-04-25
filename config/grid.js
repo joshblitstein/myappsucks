@@ -117,7 +117,7 @@ const storage = new GridFsStorage({
  
 //for lop
 
-// (when a new user registers, create them a UserFavorite with their ID ( user has one UserFavoite) )
+// remember - (when a new user registers, create them a UserFavorite with their ID ( user has one UserFavoite), set their favorites to an empty [] )
 
 // 1. '/Random' route => gfs.files grabs 5 random files from DB
 // send that array of files to the frontend
@@ -127,6 +127,7 @@ const storage = new GridFsStorage({
 // 2. Frontend -> save = creates array in frontend of FILES
 
 // 3. create POST req route, we send the array of files 
-// - UserFavorite.find(user_id) 
+// -  user = UserFavorite.find(user_id)  => update their array with 
+// user.UserFavorites = req.body.favorites
 
 
