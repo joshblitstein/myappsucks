@@ -105,8 +105,28 @@ const storage = new GridFsStorage({
         })
     
   })
+  router.get('/audio/:user_id', (req, res)=>{
+
+    // let user = User.find(req.params.id)
+    // let myFavorites = user.UserFavorrites => returns Array  
+           
+
+    
+  })
   module.exports = router;
  
 //for lop
+
+// (when a new user registers, create them a UserFavorite with their ID ( user has one UserFavoite) )
+
+// 1. '/Random' route => gfs.files grabs 5 random files from DB
+// send that array of files to the frontend
+
+// - √ gets rid of mapping number array and new req each time to get audi src
+
+// 2. Frontend -> save = creates array in frontend of FILES
+
+// 3. create POST req route, we send the array of files 
+// - UserFavorite.find(user_id) 
 
 
