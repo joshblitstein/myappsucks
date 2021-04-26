@@ -113,6 +113,35 @@ const storage = new GridFsStorage({
 
     
   })
+
+
+
+
+
+
+router.get('/random', async (req, res )=> {
+  let arr = []
+  let numOfFiles = 10;
+
+  for(let i=0; i< numOfFiles; i ++){
+  let num = Math.floor(Math.random() * 100)
+  let myFiles = gfs.files.find({filename: `${num.toString()}.mp3`})
+  for await (file of myFiles) {
+    
+    arr.push(file)
+    if(file !== file){
+      arr.push(file)
+    }
+  }
+}
+
+
+  res.json(arr)
+})
+
+
+
+
   module.exports = router;
  
 //for lop
