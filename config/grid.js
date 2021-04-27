@@ -9,7 +9,8 @@ const crypto = require('crypto')
 const config = require('config')
 const db = config.get('MongoURI')
 const express = require('express')
-const { write } = require('fs')
+const { write, read } = require('fs')
+const JSZip = require('jszip')
 const router = express.Router();
 
 
@@ -95,7 +96,7 @@ const storage = new GridFsStorage({
 
             if(file.contentType == 'audio/mpeg'){
                 const readstream = gfs.createReadStream(file.filename);
-               // const writestream = gfs.createWriteStream({ filename: req.params.filename })
+           
                 readstream.pipe(res)
             }else{
                 res.json({
@@ -119,25 +120,85 @@ const storage = new GridFsStorage({
 
 
 
-router.get('/random', async (req, res )=> {
+/* router.get('/random', async (req, res )=> {
   let arr = []
-  let numOfFiles = 10;
+  let numOfFiles = 5;
 
   for(let i=0; i< numOfFiles; i ++){
   let num = Math.floor(Math.random() * 100)
   let myFiles = gfs.files.find({filename: `${num.toString()}.mp3`})
+
+  
   for await (file of myFiles) {
     
     arr.push(file)
     if(file !== file){
       arr.push(file)
     }
+    
+
+
   }
 }
 
 
-  res.json(arr)
+arr.forEach(file =>{
+       const readstream = gfs.createReadStream(file.filename);
+          console.log(file)
+        res.write(readstream).catch()
+   //    readstream.pipe(res.json(file))
 })
+
+  
+}) */
+
+
+router.get('/keep', (req, res)=>{
+
+  let num = Math.floor(Math.random() * 100)
+
+  gfs.files.findOne({ filename: `${num.toString()}.mp3` } , async (err, file) => {
+    if(!file){
+        return    res.json({
+                err: 'uproad'
+            })
+        }
+       
+
+       if (file.contentType == 'audio/mpeg'){
+            const readstream = await gfs.createReadStream(file.filename);
+          console.log(readstream)
+          await  readstream.pipe(res)
+        }else{
+            res.json({
+                err: 'nahnah' 
+            })
+        }
+    })
+})
+
+router.get('/static/:filename/zip', (req, res)=>{
+  gfs.files.findOne({ filename: req.params.filename} , (err, file) => {
+      if(!file){
+          return    res.json({
+                  err: 'uproad'
+              })
+          }
+         
+           
+          if(file.contentType == 'audio/mpeg'){
+              const readstream = gfs.createReadStream(file.filename);
+       //  console.log(readstream)
+              readstream.pipe(res)
+          }else{
+              res.json({
+                  err: 'nahnah' 
+              })
+          }
+      })
+  
+})
+
 
 
 

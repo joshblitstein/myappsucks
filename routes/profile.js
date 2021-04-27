@@ -41,23 +41,29 @@ router.post('/', [ auth ], async (req, res) => {
  
     const profileField = {}; 
     profileField.user = req.user.id; 
-    if(files) profileField.files = files; 
+   // if(files) profileField.files = files; 
     if(fileName) profileField.fileName = fileName; 
     if(location) profileField.location = location; 
     if(status) profileField.status = status; 
     if(skills) profileField.skills = skills; 
     if(bio) profileField.bio = bio; 
- 
+    
+    
+
+    console.log(files)
     
     try {
         
         let profile =  await Profile.findOne({ user: req.user.id })
 
         if(profile){
-            profile = await Profile.findOneAndUpdate({ user: req. user.id }, { $set: profileField },
-                {new : true})
+            profile = await Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileField,
+                $addToSet: {files: files}
+            },
+                 {new : true})
 
                  return res.json(profile)
+                 
         }
 
         profile = new Profile(profileField);
@@ -73,6 +79,17 @@ router.post('/', [ auth ], async (req, res) => {
  
     
 });
+
+router.post('/profile', [ auth ], async (req, res)=>{
+    
+    
+
+
+
+
+})
+
+
 
 router.get('/', async (req, res)=>{
 try {

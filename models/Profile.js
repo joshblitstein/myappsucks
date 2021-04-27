@@ -12,6 +12,10 @@ const ProfileSchema = new mongoose.Schema({
             number: Number
         }]
     },
+
+    fileName : [String],
+
+    fileNumber: [Number],
   
     location:{
         type: String
