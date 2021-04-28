@@ -6,6 +6,7 @@ const ProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
+  
     files: {
       type: [{
             fileName: String, 

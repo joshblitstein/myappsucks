@@ -58,7 +58,7 @@ router.post('/', [ auth ], async (req, res) => {
 
         if(profile){
             profile = await Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileField,
-                $addToSet: {files: files}
+                $push: {files: files}
             },
                  {new : true})
 
@@ -110,6 +110,7 @@ router.get('/user/:user_id', async (req, res)=>{
                 msg: "doesnt exist"
             })
         }
+        console.log(profile)
         res.json(profile)
     } catch (error) {
         if(error.kind == "ObjectId"){
@@ -120,6 +121,31 @@ router.get('/user/:user_id', async (req, res)=>{
         console.error(error.message).send('nonagon')
     }
     }) 
+
+
+    router.post('/user/get', async (req, res)=>{
+        try {
+            console.log(req.body)
+            const profile = await Profile.findOne({ user: req.body.id})
+            .populate('user', ['name', 'avatar'])
+    
+            if(!profile){
+                return res.status(400).json({
+                    msg: "doesnt exist"
+                })
+            }
+            console.log(profile.files )
+            res.json(profile)
+        } catch (error) {
+            if(error.kind == "ObjectId"){
+                return res.status(400).json({
+                    msg: "doesnt anus exist"
+                })
+            }
+            console.error(error.message).send('nonagon')
+        }
+        }) 
+
 
 
 
@@ -139,6 +165,72 @@ router.get('/user/:user_id', async (req, res)=>{
             console.error(error.message).send('nonagon')
         }
         }) 
+
+
+        router.get('/return', (req, res)=> {
+            try {
+
+                const profile = Profile.findById({ user: req.params.user_id })
+
+
+            } catch (error) {
+                
+            }
+        })
+
+     /*    router.delete('/delete', [ auth ], async (req, res) => {
+
+            const errors = validationResult(req);
+            if(!errors.isEmpty() ){
+                return res.status(400).json({ errors: errors.array() })
+            }
+        
+             const { files, fileName, location, status, skills, bio } = req.body; 
+         
+            const profileField = {}; 
+            profileField.user = req.user.id; 
+           // if(files) profileField.files = files; 
+            profileField.files = files
+            
+            
+        
+            //console.log(files)
+            
+            try {
+                
+                let profile =  await Profile.findOne({ user: req.user.id })
+        
+                if(profile){
+                    profile = await Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileField,
+                        $pull: {files: profileField.files} 
+                    }, 
+                    
+                         {new : false})
+                   // console.log(files)
+                         return res.json(profile)
+                         
+                }
+        
+                profile = new Profile(profileField);
+        
+                await profile.save()
+                res.json(profile)
+        
+            } catch (error) {
+                console.error(error.message);
+                res.status(500).send('server sucks')
+            }
+            
+         
+            
+        }); */
+
+
+        router.post('/gone', (req, res )=>{
+            
+            console.log(req)
+        })
+
 
 
 module.exports = router;
