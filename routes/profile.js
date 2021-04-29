@@ -226,9 +226,10 @@ router.get('/user/:user_id', async (req, res)=>{
         }); */
 
 
-        router.post('/gone', (req, res )=>{
+        router.post('/:id/remove-audio', (req, res )=>{
             
-            console.log(req)
+            console.log(req.body)
+            const profile = Profile.findById({ user: req.params.user_id })
         })
 
 
