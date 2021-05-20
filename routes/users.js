@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const { check, validationResult } = require('express-validator')
 const User = require('../models/User')
+const Profile = require('../models/Profile')
 const gravatar = require('gravatar')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -20,7 +21,7 @@ router.post('/user', [
     if(!errors.isEmpty()){
         return res.status(400).json({ errors: errors.array()})
     }
-    console.log(req.body)
+  //  console.log(req.body)
 
         const { name, email, password } = req.body;
         try {
@@ -78,7 +79,9 @@ router.post('/user', [
         }
 
 
-
+      
+    
+      
 
 //res.send(":hi")
 

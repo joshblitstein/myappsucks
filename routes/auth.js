@@ -21,7 +21,7 @@ router.get('/auth', auth, async (req, res)=>{
 res.send("sup auth")
 });
 
-
+ 
 router.post('/auth', [
    
     check('email', 'include email').isEmail(),
