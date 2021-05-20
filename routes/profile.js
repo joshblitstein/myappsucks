@@ -238,6 +238,7 @@ router.get('/user/:user_id', async (req, res)=>{
 
 
 
+<<<<<<< HEAD
         router.post('/gone1', [ auth ], async (req, res) => {
 
             const errors = validationResult(req);
@@ -288,6 +289,13 @@ router.get('/user/:user_id', async (req, res)=>{
             
         }); 
 
+=======
+        router.post('/:id/remove-audio', (req, res )=>{
+            
+            console.log(req.body)
+            const profile = Profile.findById({ user: req.params.user_id })
+        })
+>>>>>>> 8ded1b40c10e402c66c9c617dd672fe8934c26ed
 
         router.get('/myfiles', [ auth ], async (req, res) =>{
 
